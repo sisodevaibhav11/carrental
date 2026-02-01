@@ -4,10 +4,11 @@
 *{
   font-family: "Outfit", sans-serif;
 }
-@theme
+
+:root
 {
   --color-primary: #2563EB;
   --color-primary-dull:#1F58D8;
-  --color-light:#F15F5F9;
-  --color-borderColor:#c4c7d2;
+  --color-light:#F5F5F9;
+  --color-borderColor:#c1c7db;
 }
