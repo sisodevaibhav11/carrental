@@ -23,7 +23,7 @@ export const registerUser = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
-        const user = await User.create({ name, email, password, hashedPassword })
+        const user = await User.create({ name, email, password:hashedPassword })
         const token = generateToken(user._id.toString())
         res.json({ success: true, token })
     }
@@ -41,6 +41,7 @@ export const loginUser = async (req, res) => {
         if (!user) {
             return res.json({ success: false, message: "User not found" })
         }
+        
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
             return res.json({ success: false, message: "Invalid Credentials" })
@@ -50,6 +51,20 @@ export const loginUser = async (req, res) => {
     }
     catch (error) {
         console.log(error.message);
-        return res.json({ success: false, message: error.message })
+        return res.json({ success: false, message: error.message }) 
+    }
+}
+
+
+//get user data using token 
+export const getUserData=async(req,res)=>{
+    try{
+        const {user}=req;
+        res.json({success:true,user});
+    }
+    catch(error)
+    {
+        console.log(error.message);
+        res.json({success:false,message:error.message})
     }
 }
