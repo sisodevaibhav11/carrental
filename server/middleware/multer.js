@@ -1,5 +1,13 @@
+// middleware/multer.js
 import multer from "multer";
 
-const upload=multer({storage:multer.diskStorage({})})
+const storage = multer.diskStorage({
+  destination: "uploads/",
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-export default upload
+const upload = multer({ storage });
+
+export default upload;
